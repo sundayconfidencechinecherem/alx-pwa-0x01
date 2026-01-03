@@ -31,9 +31,16 @@ const Movies: React.FC<MProps> = () => {
       }
     })
 
-    if (!response.ok) {
+    // if (!response.ok) {
+    //   setLoading(false)
+    //   throw new Error("Something went wrong")
+    // }
+
+     if (!response.ok) {
       setLoading(false)
-      throw new Error("Something went wrong")
+      console.error("API error:", response.status)  // ✅ Just log the error
+      setMovies([])  // ✅ Set empty movies instead
+      return  // ✅ Stop execution, don't throw error
     }
 
     const data = await response.json()
@@ -45,7 +52,10 @@ const Movies: React.FC<MProps> = () => {
 
 
   useEffect(() => {
-    fetchMovies()
+   const loadMovies = async () => {
+      await fetchMovies()
+    }
+    loadMovies()
   }, [fetchMovies])
 
 

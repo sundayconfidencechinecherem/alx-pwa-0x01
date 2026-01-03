@@ -12,7 +12,8 @@ export interface ButtonProps {
 export interface MovieProps {
   id?: string
   posterImage: string
-  releaseYear: string
+  releaseYear?: number | string
+
   title: string
 }
 
